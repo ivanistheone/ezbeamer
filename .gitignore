@@ -1,0 +1,7 @@
+*.pyc
+.svn
+*~
+*.swp
+*.o
+*.log.py
+.DS_Store

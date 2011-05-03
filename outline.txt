@@ -1,0 +1,33 @@
+
+Topic models
+    
+    What are they?
+
+    # this is a comment
+        Latent Dirichlet allocation
+            frame contents
+            \begin{itemize}
+                \item item1
+                \item item2
+            \end{itemize}
+            %this is a comment in latex
+
+ILDA is the second section
+    Limitations of LDA
+    Improvements
+        Another slidetitle
+            some content \\
+            content continued 
+                            # weird comment
+            dangling content
+
+# first level comment
+Applications
+
+    Document classification
+
+    Similarity metrics
+        Slide w/no contents
+
+
+

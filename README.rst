@@ -38,6 +38,21 @@ The outline file
 
 Will be rendered to .tex with the appropriate 
 headers and \frame and \frametitle tags.
+::
+
+    \section{Section}
+        \subsection{Subsection}
+            \frame{
+                \frametitle{Slide 1}
+                \begin{itemize}
+                    \item one
+                    \item two
+                \end{itemize}
+            }
+
+            \frame{
+                \frametitle{Slide 2}
+            }
 
 
 Current status
