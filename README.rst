@@ -20,8 +20,8 @@ Prereqs
 
 
 
-Example
--------
+Example 0
+---------
 
 
 The outline file
@@ -53,6 +53,18 @@ headers and \frame and \frametitle tags.
             \frame{
                 \frametitle{Slide 2}
             }
+
+
+Example 1
+---------
+
+Running the command:
+::
+
+    ./ezbeamer.py --name test2 --title "Some title" --short_title ttq --author "Ivan Savov" --outline ./outline.txt 
+    
+produces the file outline_result.pdf 
+
 
 
 Current status
