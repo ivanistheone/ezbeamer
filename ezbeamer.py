@@ -370,11 +370,12 @@ def ezbeamer_create_latex( args ):
                 texfile.write(lsp+"\\frame{\n"+lsp+"    \\frametitle{"+line.strip()+"}\n")
                 state='inslide'
             if lsp.startswith(" "*12) or lsp.startswith("\t\t\t"):
+
                 if state!='inslide':
                     print "skipping line ", line.strip(), " doesn't seem to below to any slide "
                 else:
-                        texfile.write(line)
-                        state='inslide'
+                    texfile.write(line)
+                    state='inslide'
 
         foot = FOOTER.substitute()
         texfile.write(foot)
