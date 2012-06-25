@@ -27,6 +27,15 @@ Your department \\
 
 \begin{document}
 
+\tikzset{
+    cnode/.style={isosceles triangle,
+                isosceles triangle apex angle=60,thick,
+                draw=blue!75, fill=blue!20,minimum height=6mm,inner sep=0.3mm},
+    qnode/.style={circle,thick,draw=blue!75,fill=blue!20,minimum size=6mm,inner sep=0.3mm},
+    every label/.style= {black, font=\footnotesize}
+}
+
+
 \begin{frame}
 \titlepage
 \end{frame}
@@ -206,6 +215,12 @@ HEADER=Template(r"""\documentclass[10pt]{beamer}
 \def\cY{\mathcal{Y}}
 \def\NN{\mathbb{N}}
 
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,decorations,automata,backgrounds,petri}
+\usetikzlibrary{shapes.gates.logic.US}
+% http://tex.stackexchange.com/questions/13933/drawing-mechanical-systems-in-latex/13952#13952
+\usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
+
 
 
 
@@ -298,7 +313,8 @@ def ezbeamer_create_latex( args ):
         name = args.name
 
     # make a de dir
-    os.mkdir(name)
+    if not os.path.exists(name):
+        os.mkdir(name)
     #os.chdir(name)
     texfile = open(name+"/"+name+".tex","w")
 
@@ -337,6 +353,7 @@ def ezbeamer_create_latex( args ):
         # thx http://stackoverflow.com/questions/2268532/grab-a-lines-whitespace-indention-with-python/2268559#2268559
         lead_sp = re.compile(r"\s*")
         comment = re.compile(r"\s*#")
+        frame_title =  re.compile("\s*([^\[]*)(\s*\[(.*)\])?") 
 
         outline = open(args.outline, 'r')
 
@@ -355,7 +372,7 @@ def ezbeamer_create_latex( args ):
             lsp = lead_sp.match(line).group()
 
             if state=='inslide' and not (lsp.startswith(" "*12) or lsp.startswith("\t\t\t")):
-                texfile.write(" "*8 + "}\n\n" )
+                texfile.write("\t"*2 + "\\end{frame}\n\n" )
                 state='out'
                 # slide closing
 
@@ -367,7 +384,13 @@ def ezbeamer_create_latex( args ):
             if lsp in [" "*4, "\t"]:
                 texfile.write(lsp+"\\subsection{"+line.strip()+"}\n\n")
             if lsp in [" "*8, "\t\t"]:
-                texfile.write(lsp+"\\frame{\n"+lsp+"    \\frametitle{"+line.strip()+"}\n")
+                m = frame_title.match(line)
+                ft = m.groups()[0].strip()
+                if m.groups()[1]:
+                    opts = m.groups()[2]
+                    texfile.write(lsp+"\\begin{frame}["+opts+"]\n"+lsp+"\t\\frametitle{"+ft+"}\n")
+                else:
+                    texfile.write(lsp+"\\begin{frame}\n"+lsp+"\t\\frametitle{"+ft+"}\n")
                 state='inslide'
             if lsp.startswith(" "*12) or lsp.startswith("\t\t\t"):
 
