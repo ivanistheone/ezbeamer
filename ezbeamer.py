@@ -36,7 +36,7 @@ Your department \\
 }
 
 
-\begin{frame}
+\begin{frame}[plain]
 \titlepage
 \end{frame}
 
@@ -222,7 +222,22 @@ HEADER=Template(r"""\documentclass[10pt]{beamer}
 \usetikzlibrary{calc,patterns,decorations.pathmorphing,decorations.markings}
 
 
+\def\indicator{ \ \mathbf{1} }
 
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+
+\usepackage{subfigure}
+\usepackage{stmaryrd}   %FOR LIGHTNING SYMBOL
 
 
 %_____________________________________________________________________%
@@ -245,7 +260,7 @@ FOOTER=Template(r"""
 \begin{frame}
 	\frametitle{The end}
 	\begin{center}
-		\huge thank you for your attention!
+		\huge Thank you for your attention!
 	\end{center}
 \end{frame}
 
@@ -407,9 +422,9 @@ def ezbeamer_create_latex( args ):
         texfile.close()
 
     print "done"
-    print "Look for a directory called " + name + " and the .tex file inside"
-    print "to typeset to PDF run:     pdflatex " + name +".tex"
-    print "thank you come again... ivan.savov gmail com"
+    #print "Look for a directory called " + name + " and the .tex file inside"
+    #print "to typeset to PDF run:     pdflatex " + name +".tex"
+    #print "thank you come again... ivan.savov gmail com"
 
 
 if __name__=="__main__":
